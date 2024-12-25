@@ -27,6 +27,7 @@ then
       break
     fi
     else
+        #if input is not null
      echo "That is not an integer, guess again:"
     fi
   done
@@ -61,6 +62,7 @@ else
       break
     fi
     else
+    #if input is not null
       echo "That is not an integer, guess again:"
     fi
   done
