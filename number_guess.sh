@@ -12,6 +12,8 @@ then
   echo -e "\nGuess the secret number between 1 and 1000:"
   NUMBER_OF_GUESSES=0
   while read USER_GUESS; do
+    if [[ $USER_GUESS =~ ^-?[0-9]+$ ]]
+    then
     NUMBER_OF_GUESSES=$((NUMBER_OF_GUESSES+1))
     if [[ $USER_GUESS -gt $RANDOM_NUMBER ]]
     then
@@ -23,7 +25,10 @@ then
       INSERT_USER_INFO=$($PSQL "insert into user_info(username,games_played,best_game) values('$USERNAME',1,$NUMBER_OF_GUESSES);")
       echo "You guessed it in $NUMBER_OF_GUESSES tries. The secret number was $RANDOM_NUMBER. Nice job!"
       break
-    fi 
+    fi
+    else
+     echo "That is not an integer, guess again:"
+    fi
   done
 else
   # Instead of piping, directly read into variables
@@ -35,6 +40,8 @@ else
   echo -e "\nGuess the secret number between 1 and 1000:"
   NUMBER_OF_GUESSES=0
   while read USER_GUESS; do
+  if [[ $USER_GUESS =~ ^-?[0-9]+$ ]]
+  then
     NUMBER_OF_GUESSES=$((NUMBER_OF_GUESSES+1))
     if [[ $USER_GUESS -gt $RANDOM_NUMBER ]]
     then
@@ -52,6 +59,9 @@ else
       fi      
       echo "You guessed it in $NUMBER_OF_GUESSES tries. The secret number was $RANDOM_NUMBER. Nice job!"
       break
-    fi 
+    fi
+    else
+      echo "That is not an integer, guess again:"
+    fi
   done
 fi
